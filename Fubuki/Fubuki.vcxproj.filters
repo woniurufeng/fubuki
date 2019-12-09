@@ -72,6 +72,9 @@
     <ClInclude Include="code\classes\basicfuncs\timer.h">
       <Filter>头文件\basicfuncs</Filter>
     </ClInclude>
+    <ClInclude Include="code\classes\basicfuncs\muss_old.h">
+      <Filter>头文件\basicfuncs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="code\classes\basicMainLoop.cpp">
@@ -124,6 +127,9 @@
     </ClCompile>
     <ClCompile Include="code\main.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="code\classes\basicfuncs\muss_old.cpp">
+      <Filter>源文件\basicfuncs</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

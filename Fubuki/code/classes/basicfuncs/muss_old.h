@@ -1,6 +1,6 @@
 
-#ifndef MUSS_H
-#define MUSS_H
+#ifndef MUSS_OLD_H
+#define MUSS_OLD_H
 
 #include "SDL2/SDL_mixer.h"
 
@@ -9,7 +9,7 @@
 #include <iostream>
 #include <fstream>
 
-class MUSS{
+class MUSS2{
 private:
 	Mix_Music* mus[10005];
 	Mix_Chunk* chk[10005];
@@ -31,8 +31,8 @@ public:
 	void haltChk( int channel );
 	
 	int init();
-	MUSS();
-	~MUSS();
+	MUSS2();
+	~MUSS2();
 };
 
 

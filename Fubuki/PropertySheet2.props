@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros">
+    <SDL2PATH>D:\u\gamemaking\2019\Fubuki 0.0.5\SDL2-devel-2.0.10-VC\SDL2-2.0.10</SDL2PATH>
+  </PropertyGroup>
+  <PropertyGroup>
+    <_PropertySheetDisplayName>PropertySheet_dbg32</_PropertySheetDisplayName>
+  </PropertyGroup>
+  <ItemDefinitionGroup />
+  <ItemGroup>
+    <BuildMacro Include="SDL2PATH">
+      <Value>$(SDL2PATH)</Value>
+    </BuildMacro>
+  </ItemGroup>
+</Project>
