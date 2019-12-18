@@ -19,6 +19,9 @@
     <Filter Include="源文件\basicfuncs">
       <UniqueIdentifier>{c686e82b-751c-4cb6-977a-9bbf318cf0e8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="资源文件\list">
+      <UniqueIdentifier>{509d0982-8173-475d-8d93-05d81e1d433f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="code\classes\allClasses.h">
@@ -75,30 +78,18 @@
     <ClInclude Include="code\classes\basicfuncs\muss_old.h">
       <Filter>头文件\basicfuncs</Filter>
     </ClInclude>
+    <ClInclude Include="code\classes\basicfuncs\glbvar2.h">
+      <Filter>头文件\basicfuncs</Filter>
+    </ClInclude>
+    <ClInclude Include="code\classes\battleField.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="code\classes\moster.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="code\classes\basicMainLoop.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="code\classes\commonfuc2.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="code\classes\mainLoop1.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="code\classes\mainLoop2.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="code\classes\mainLoop3.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="code\classes\mainLoop4.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="code\classes\mainLoop5.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="code\classes\mainLoop6.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="code\classes\basicfuncs\pics.cpp">
@@ -116,9 +107,6 @@
     <ClCompile Include="code\classes\basicfuncs\SDL_FontCache.cpp">
       <Filter>源文件\basicfuncs</Filter>
     </ClCompile>
-    <ClCompile Include="code\classes\basicfuncs\muss.cpp">
-      <Filter>源文件\basicfuncs</Filter>
-    </ClCompile>
     <ClCompile Include="code\classes\basicfuncs\data.cpp">
       <Filter>源文件\basicfuncs</Filter>
     </ClCompile>
@@ -131,5 +119,28 @@
     <ClCompile Include="code\classes\basicfuncs\muss_old.cpp">
       <Filter>源文件\basicfuncs</Filter>
     </ClCompile>
+    <ClCompile Include="code\classes\mainLoop1.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="code\classes\basicfuncs\glbvar2.cpp">
+      <Filter>源文件\basicfuncs</Filter>
+    </ClCompile>
+    <ClCompile Include="code\classes\mainLoop2.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="code\classes\commonfuc2.cpp">
+      <Filter>源文件\basicfuncs</Filter>
+    </ClCompile>
+    <ClCompile Include="code\classes\mainLoop_changeDt.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="items\lists\pictureList.gdata">
+      <Filter>资源文件\list</Filter>
+    </None>
+    <None Include="items\lists\musicList.gdata">
+      <Filter>资源文件\list</Filter>
+    </None>
   </ItemGroup>
 </Project>

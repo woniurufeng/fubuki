@@ -12,34 +12,19 @@
 //extern void load_musData(Muss *muss);
 static void load_musData( MUSS *muss ){
 	muss->init();
-	
-	for(int i = 0; i <= 51; i++)
-		muss->insertChk( "items/musics/"+soundName[i]+".mp3", i );
-	muss->insertChk("items/musics/snare.mp3", 101);
-	muss->insertChk("items/musics/kick.mp3", 102);
-	muss->insertChk("items/musics/pekopeko.mp3", 200);
-	muss->insertChk("items/musics/pekopeko2.mp3", 202);
-	muss->insertChk("items/musics/karoi.mp3", 201);
-	muss->insertChk("items/musics/empty.mp3", 1000);
-	
-	//muss->playMus(1, 1);
-	
-	ifstream fin("items/lists/musicScoreList.gdata");
+
+	ifstream fin("items/lists/musicList.gdata");
+
 	string tmp_str;
-	int tmp_n = 0;
-	while(fin >> tmp_str){
-		fin >> tmp_n; 
-		musicScoreList[tmp_n] = tmp_str;
+	int tmp_num;
+	while (fin >> tmp_str) {
+		fin >> tmp_num;
+		muss->insertChk(tmp_str, tmp_num);
 	}
 	fin.close();
 	
-	memset(directName, 0, sizeof directName);
-	for(int i = 0; i <= 128; i++)
-		directName[i] = -1;
-	directName['w'] = directName['W'] = 0;
-	directName['d'] = directName['D'] = 1;
-	directName['s'] = directName['S'] = 2;
-	directName['a'] = directName['A'] = 3;
+	//muss->playMus(1, 1);
+
 }
  
 
@@ -62,31 +47,9 @@ static void load_picData(PICS *pics){
 
  
 static void init_all(Timer *fps){
-	memset(dxMap, 0, sizeof dxMap);
-	for(int i = 240; i <= 260; i++)
-		for(int j = 240; j <= 260; j++)
-			dxMap[i][j] = (i + j) % 2 + 1;
-	
-	for(int i = 1; i <= preMstNum; i++){
-		ztMst[i][0] = preMst[i-1][0];
-		ztMst[i][1] = preMst[i-1][1];
-		ztMst[i][2] = preMst[i-1][2];
-		ztMst[i][3] = 1;
-	}
-	
-	nowx = 250;
-	nowy = 250;
-	gameType = 0;
-	playerHp = 10;
-	nowMstNum = preMstNum;
-	siShift = -1;
-	catMove = 0;
-	pressFrame = -200;
-	pmType = -1;
+
 	
 	//gsframe = frame;
-
-	load_musicScore(1);
 
 	gsTime = fps->get_ticks() + 1000;
 }

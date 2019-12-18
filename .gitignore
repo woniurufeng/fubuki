@@ -341,3 +341,5 @@ healthchecksdb
 
 /.vs/
 /Fubuki/tmp
+/Fubuki/code/classes/mainLoop11.cpp
+/Fubuki.rar

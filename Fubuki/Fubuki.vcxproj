@@ -27,6 +27,7 @@
     <ClInclude Include="code\classes\basicfuncs\CThread.h" />
     <ClInclude Include="code\classes\basicfuncs\data.h" />
     <ClInclude Include="code\classes\basicfuncs\glbvar.h" />
+    <ClInclude Include="code\classes\basicfuncs\glbvar2.h" />
     <ClInclude Include="code\classes\basicfuncs\main_set.h" />
     <ClInclude Include="code\classes\basicfuncs\muss.h" />
     <ClInclude Include="code\classes\basicfuncs\muss_old.h" />
@@ -35,14 +36,16 @@
     <ClInclude Include="code\classes\basicfuncs\talkBox.h" />
     <ClInclude Include="code\classes\basicfuncs\timer.h" />
     <ClInclude Include="code\classes\basicMainLoop.h" />
+    <ClInclude Include="code\classes\battleField.h" />
     <ClInclude Include="code\classes\commonfuc2.h" />
     <ClInclude Include="code\classes\main_data.h" />
+    <ClInclude Include="code\classes\moster.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="code\classes\basicfuncs\commonfuc1.cpp" />
     <ClCompile Include="code\classes\basicfuncs\data.cpp" />
     <ClCompile Include="code\classes\basicfuncs\glbvar.cpp" />
-    <ClCompile Include="code\classes\basicfuncs\muss.cpp" />
+    <ClCompile Include="code\classes\basicfuncs\glbvar2.cpp" />
     <ClCompile Include="code\classes\basicfuncs\muss_old.cpp" />
     <ClCompile Include="code\classes\basicfuncs\pics.cpp" />
     <ClCompile Include="code\classes\basicfuncs\SDL_FontCache.cpp" />
@@ -52,11 +55,12 @@
     <ClCompile Include="code\classes\commonfuc2.cpp" />
     <ClCompile Include="code\classes\mainLoop1.cpp" />
     <ClCompile Include="code\classes\mainLoop2.cpp" />
-    <ClCompile Include="code\classes\mainLoop3.cpp" />
-    <ClCompile Include="code\classes\mainLoop4.cpp" />
-    <ClCompile Include="code\classes\mainLoop5.cpp" />
-    <ClCompile Include="code\classes\mainLoop6.cpp" />
+    <ClCompile Include="code\classes\mainLoop_changeDt.cpp" />
     <ClCompile Include="code\main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="items\lists\musicList.gdata" />
+    <None Include="items\lists\pictureList.gdata" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -155,7 +159,7 @@
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>$(SDL2PATH)\lib\x86\SDL2main.lib;$(SDL2PATH)\lib\x86\SDL2.lib;$(SDL2PATH)\lib\x86\SDL2_image.lib;$(SDL2PATH)\lib\x86\SDL2_mixer.lib;$(SDL2PATH)\lib\x86\SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>

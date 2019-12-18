@@ -40,7 +40,7 @@ public:
 
 public:
 	int halt(CMutex* g_metux) {
-		CLock lock(g_metux);
+		//CLock lock(g_metux);
 		if (playSign) {
 			MCI_STATUS_PARMS mciStatusParms;
 			mciStatusParms.dwItem = MCI_STATUS_POSITION;
@@ -68,7 +68,7 @@ public:
 		}
 		return 0;
 	}
-	int haltAll(CMutex* g_metux){
+	int haltAll(CMutex* g_metux) {
 		if (son != NULL)
 			son->haltAll(g_metux);
 		if (playSign) {
@@ -84,8 +84,16 @@ public:
 		}
 		return 0;
 	}
-	void play(std::string FILE1, CMutex *g_metux, int max_dLength_, int fromTime) {
-		CLock lock(g_metux);
+	void changeLoud(int loud) {
+		if (!check())
+			return;
+		MCI_DGV_SETAUDIO_PARMS mciSetAudioPara;
+		mciSetAudioPara.dwItem = MCI_DGV_SETAUDIO_VOLUME;
+		mciSetAudioPara.dwValue = loud;
+		mciSendCommand(DeviceID, MCI_SETAUDIO, MCI_DGV_SETAUDIO_VALUE | MCI_DGV_SETAUDIO_ITEM, (DWORD)(LPVOID)& mciSetAudioPara);
+	}
+	void play(std::string FILE1, CMutex *g_metux, int max_dLength_, int fromTime, int loud) {
+		//CLock lock(g_metux);
 		//std::cout << m_strThreadName << std::endl;
 
 		if (check()) {
@@ -104,7 +112,7 @@ public:
 			}
 			sprintf_s(str, "tmp/%s_.mp3", m_strThreadName.c_str());
 			std::string s = str;
-			son->play(str, g_metux, max_dLength_, fromTime);
+			son->play(str, g_metux, max_dLength_, fromTime, loud);
 				return;
 		}
 		else {
@@ -118,11 +126,7 @@ public:
 				DeviceID = mciOpen->wDeviceID;
 			}
 		}
-		
-		MCI_DGV_SETAUDIO_PARMS mciSetAudioPara;
-		mciSetAudioPara.dwItem = MCI_DGV_SETAUDIO_VOLUME;
-		mciSetAudioPara.dwValue = 200;
-		mciSendCommand(DeviceID, MCI_SETAUDIO, MCI_DGV_SETAUDIO_VALUE | MCI_DGV_SETAUDIO_ITEM, (DWORD)(LPVOID)& mciSetAudioPara);
+		changeLoud(loud);
 
 		mciPlay = new MCI_PLAY_PARMS;
 		mciPlay->dwFrom = fromTime;
@@ -200,7 +204,7 @@ public:
 		chk[chkNum] = FILE1;
 		chkHash[chkNum] = 1;
 	};
-	void playChk(int chkNum, int max_dLength, int fromTime) {
+	void playChk(int chkNum, int max_dLength, int fromTime, int loud) {
 
 		if (!chkHash[chkNum])
 			return;
@@ -211,10 +215,10 @@ public:
 			pmt[chkNum] = new playMusThread(s);
 		}
 		channelHash[chkNum] = 1;
-		pmt[chkNum]->play(chk[chkNum], &g_metux, max_dLength, fromTime);
+		pmt[chkNum]->play(chk[chkNum], &g_metux, max_dLength, fromTime, loud);
 	}
 	void playChk(int chkNum) {
-		playChk(chkNum, -1, 0);
+		playChk(chkNum, -1, 0, 200);
 	}
 	int haltChk(int channel) {
 		int ret = 0;
@@ -232,6 +236,10 @@ public:
 	void haltAllChk() {
 		for (int i = 0; i < 10000; i++)
 			haltAllChk(i);
+	}
+	void changeLoud(int channel, int loud) {
+		if (pmt[channel] != NULL)
+			pmt[channel]->changeLoud(loud);
 	}
 	
 	void init() {

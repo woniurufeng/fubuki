@@ -17,12 +17,13 @@ bool preset_window()
 		return 0;
 	// 建立窗口
 
-	windowsW = 1280;
-	windowsH = 720;
 	bool fsc = 0;
 
 	ifstream fin("save/set.txt");
 	fin >> windowsW >> windowsH >> fsc;
+	fin.close();
+	fin.open("save/dtTime.txt");
+	fin >> dtTime;
 	fin.close();
 
 
@@ -51,8 +52,10 @@ int main(int argc, char * argv[])
 	fout1.open("items/test/debug.txt");
 	//int result = Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 1024 );
 
-	//font1 = FC_CreateFont();
-	//FC_LoadFont(font1, myRenderer, "items/fonts/simsun.ttc", 20, FC_MakeColor(0, 0, 0, 255), TTF_STYLE_NORMAL);
+	int fontSize = RR.ww(20);
+	fout1 << fontSize << endl;
+	GLBfont1 = FC_CreateFont();
+	FC_LoadFont(GLBfont1, myRenderer, "items/fonts/simsun.ttc", fontSize, FC_MakeColor(0, 0, 0, 255), TTF_STYLE_NORMAL);
 
 	//载入BGM
 	MUSS *muss = new MUSS();
@@ -66,12 +69,16 @@ int main(int argc, char * argv[])
 
 	//帧率调节器
 	Timer fps;
+	GLBfps = &fps;
 
 	//读取存档
 	//DATA sdata;
 	//load_data(&sdata);
 
 	//初始化
+	GLBpics = pics;
+	GLBmuss = muss;
+	GLBrenderer = myRenderer;
 	fps.start();
 	init_all(&fps);
 
@@ -80,7 +87,7 @@ int main(int argc, char * argv[])
 	//进入游戏
 
 	init_all(&fps);
-	nowLoop = new mainLoop5(myRenderer, pics, muss, &fps);
+	nowLoop = new mainLoop1(myRenderer, pics, muss, &fps);
 	nowLoop->run();
 
 	return 0;

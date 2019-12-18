@@ -6,22 +6,6 @@ void exitGame()
 	return ;
 }
 
-// ÒôÃû×ªÒôÆµºÅ 
-int stringToPn( string pss ){
-	
-	if( pss == "stop" )
-		return -2;
-	if( pss == "num" )
-		return -3;
-	int psn = -1;
-	for(int i = 0; i < 88; i++)
-		if( pss == soundName[i] ){
-			psn = i;
-			break;
-		}
-	return psn;
-}
-
 char* localeToUTF8(char* src)
 {
 	char* buf = NULL;
@@ -90,4 +74,8 @@ wchar_t* cstringToUnicode(char* aSrc)
 	unicodestr = (wchar_t*)(malloc((size + 1) * sizeof(wchar_t)));
 	MultiByteToWideChar(CP_ACP, 0, aSrc, -1, unicodestr, size);
 	return unicodestr;
+}
+
+void sogr(int picNum, SDL_Rect *r1, SDL_Rect *r2) {
+	SDL_RenderCopy(GLBrenderer, GLBpics->getPicText(picNum), r1, RR.rr(r2));
 }

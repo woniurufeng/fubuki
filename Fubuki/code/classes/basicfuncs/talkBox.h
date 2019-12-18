@@ -64,8 +64,8 @@ public :
 		this->pics = pics; 
 		this->fileName = fileName;
 
-		font = FC_CreateFont();
-		FC_LoadFont(font, myRenderer, "items/fonts/simsun.ttc", fontSize, FC_MakeColor(0, 0, 0, 255), TTF_STYLE_NORMAL);
+		//font = FC_CreateFont();
+		//FC_LoadFont(font, myRenderer, "items/fonts/simsun.ttc", fontSize, FC_MakeColor(0, 0, 0, 255), TTF_STYLE_NORMAL);
 		
 		fin.open(fileName);
 
@@ -111,12 +111,15 @@ public :
 		//cout << tmpDraw << endl << endl;
 		bmr2.w = fontSize / 2 * rlenthChtName + 2;
 		brr2.x = 30 + 11 + bmr2.w;
-		SDL_RenderCopy(myRenderer, pics->getPicText(bln), &blr1, RR.ll(&blr2));
-		SDL_RenderCopy(myRenderer, pics->getPicText(bmn), &bmr1, RR.ll(&bmr2));
-		SDL_RenderCopy(myRenderer, pics->getPicText(brn), &brr1, RR.ll(&brr2));
-		SDL_RenderCopy(myRenderer, pics->getPicText(boxn), &boxr1, RR.ll(&boxr2));
-		FC_Draw(font, myRenderer, RR.ww(bmr2.x+1), RR.hh(bmr2.y+1), "%s\n", chtName);
-		FC_Draw(font, myRenderer, RR.ww(sttPos.x), RR.hh(sttPos.y), "%s\n", tmpDraw);
+		sogr(bln, &blr1, &blr2);
+		sogr(bmn, &bmr1, &bmr2);
+		sogr(brn, &brr1, &brr2);
+		sogr(boxn, &boxr1, &boxr2);
+
+
+
+		FC_Draw(GLBfont1, myRenderer, RR.ww(bmr2.x+1), RR.hh(bmr2.y+1), "%s\n", chtName);
+		FC_Draw(GLBfont1, myRenderer, RR.ww(sttPos.x), RR.hh(sttPos.y), "%s\n", tmpDraw);
 	}
 
 private :

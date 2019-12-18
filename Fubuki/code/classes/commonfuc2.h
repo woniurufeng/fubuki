@@ -12,10 +12,13 @@
 using namespace std;
 
 void clearSound(MUSS *muss);
-void pressPianoKey( int chnl, int psn, MUSS * muss);
-void pressPianoKey( int chnl, string pss, MUSS * muss);
 
-void load_puMian(string pmFILE);
-void load_musicScore(int msNUM); 
+// 画图方面
+void drawHp1(int hp);
+void drawMusCircle1(int nowMus, int nextMus, int ds);
+void drawBeat1();
+
+//存储方面
+void saveDtTime();
 
 #endif 
