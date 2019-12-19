@@ -35,6 +35,11 @@ void MUSS2::haltChk( int channel ){
 	Mix_HaltChannel( channel );
 }
 
+void MUSS2::haltChk() {
+	for (int i = 0; i <= 8; i++)
+		haltChk(i);
+}
+
 void MUSS2::playMus( int musNum, int times ){
 	Mix_PlayMusic( mus[musNum], times );
 }

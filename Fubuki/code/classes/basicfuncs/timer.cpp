@@ -53,6 +53,11 @@ int Timer::get_ticks()
     return 0;    
 }
 
+void Timer::set_ticks(int stks)
+{
+	this->startTicks = SDL_GetTicks() - stks;
+}
+
 void Timer::pause()
 {
     //如果计时器正在运行但没有暂停

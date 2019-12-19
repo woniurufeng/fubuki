@@ -11,8 +11,6 @@
 
 using namespace std;
 
-void clearSound(MUSS *muss);
-
 // »­Í¼·½Ãæ
 void drawHp1(int hp);
 void drawMusCircle1(int nowMus, int nextMus, int ds);

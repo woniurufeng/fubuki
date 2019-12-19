@@ -32,6 +32,7 @@ class Timer
     
     //获取计时器时间
 		int get_ticks();
+		void set_ticks(int stks);
     
     //检查计时器状态
     	bool is_started();

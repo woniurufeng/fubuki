@@ -104,13 +104,14 @@ void mainLoop_changeDt::onType() {
 		tlst = pressTime - 1.0 * tlst * onePz;
 		int tds = 1;
 		if (tlst > onePz / 2)
-			tds = -1;
-		tlst = zheng(onePz / 2 - tlst);
+			tds = -1, tlst = onePz - tlst;
+		//tlst = zheng(onePz / 2 - tlst);
 		fout1 << tlst << endl;
 		dtTime += tds * (tlst + 2) / 10;
-		if (dtTime < onePz)
-			dtTime += onePz;
+		dtTime += onePz;
 		tlst = dtTime / onePz;
 		dtTime = dtTime - tlst * onePz;
+		if (dtTime > onePz / 2)
+			dtTime -= onePz;
 	}
 }

@@ -29,6 +29,7 @@ public:
 	void pauseChk( int channel );
 	void resumeChk( int channel );
 	void haltChk( int channel );
+	void haltChk();
 	
 	int init();
 	MUSS2();

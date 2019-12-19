@@ -2,14 +2,6 @@
 #include "commonfuc2.h"
 
 // 音频处理部分 
-// 清空音频 
-void clearSound( MUSS * muss ){
-	for(int i = 1; i <= 8; i++)
-		muss->haltChk( i );
-}
-
-
-// 加载声音系统 结束
 
 
 //画图方面
