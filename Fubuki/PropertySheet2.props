@@ -2,7 +2,8 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros">
-    <SDL2PATH>D:\u\gamemaking\2019\Fubuki 0.0.5\SDL2-devel-2.0.10-VC\SDL2-2.0.10</SDL2PATH>
+    <SDL2PATH>$(ProjectDir)..\..\SDL2-devel-2.0.10-VC\SDL2-2.0.10</SDL2PATH>
+    <OPGLPATH>$(ProjectDir)..\..\glew-2.1.0-win32\glew-2.1.0</OPGLPATH>
   </PropertyGroup>
   <PropertyGroup>
     <_PropertySheetDisplayName>PropertySheet_dbg32</_PropertySheetDisplayName>
@@ -11,6 +12,9 @@
   <ItemGroup>
     <BuildMacro Include="SDL2PATH">
       <Value>$(SDL2PATH)</Value>
+    </BuildMacro>
+    <BuildMacro Include="OPGLPATH">
+      <Value>$(OPGLPATH)</Value>
     </BuildMacro>
   </ItemGroup>
 </Project>

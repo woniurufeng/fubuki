@@ -28,11 +28,22 @@ int thisTime; //这次进入循环时间
 
 int loopLength = 100;
 
-int PRE_DXY[4][2] = { -1, 0, 0, 1, 1, 0, 0, -1 };  //0123 上下左右
+int PRE_DXY[4][2] = { -1, 0, 0, 1, 1, 0, 0, -1 };  //0123 上右下左
+int preCatMove_jmp[20] = { 5, 10, 15, 21, 26, 30, 35, 39, 43, 48, 52, 56, 59, 61, 62, 60, 51, 40, 28, 15 }; // 跳跃过程中20帧的跳跃高度
+int preXZT[4] = { 3, 2, 0, 1 }; // 行走图对应的上右下左 
+int preCatMove_cat[20] = { 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2 }; // 走路过程中20帧的行走图选择 
 
 FC_Font* GLBfont1;
+SDL_Color GLBttfColor = { 0, 0, 0 };
 
 //FC_Font* font1 = NULL;
+
+SDL_BlendMode GLBblendmode01 = SDL_ComposeCustomBlendMode(SDL_BLENDFACTOR_SRC_ALPHA, SDL_BLENDFACTOR_ONE, SDL_BLENDOPERATION_SUBTRACT,
+	SDL_BLENDFACTOR_ZERO, SDL_BLENDFACTOR_ONE, SDL_BLENDOPERATION_SUBTRACT);
+SDL_BlendMode GLBblendmode02 = SDL_ComposeCustomBlendMode(SDL_BLENDFACTOR_SRC_ALPHA, SDL_BLENDFACTOR_ONE, SDL_BLENDOPERATION_MAXIMUM,
+	SDL_BLENDFACTOR_ZERO, SDL_BLENDFACTOR_ONE, SDL_BLENDOPERATION_ADD);
+SDL_BlendMode GLBblendmode03 = SDL_ComposeCustomBlendMode(SDL_BLENDFACTOR_SRC_ALPHA, SDL_BLENDFACTOR_ONE, SDL_BLENDOPERATION_ADD,
+	SDL_BLENDFACTOR_ZERO, SDL_BLENDFACTOR_ONE, SDL_BLENDOPERATION_ADD);
 
 ofstream fout1;
 

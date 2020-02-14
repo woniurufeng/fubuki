@@ -5,7 +5,37 @@ void exitGame()
 	exitGameSign = 1;
 	return ;
 }
+void clearEvent() {
+	SDL_Event event;
+	while (SDL_PollEvent(&event))
+	{
+		//onType();
+		//如果用户单击了窗口右上角的关闭按钮
+		if (event.type == SDL_QUIT)
+		{
+			//退出程序
+			exitGame();
+			return;
+		}
+	}
+}
 
+char* U2G(const char* utf8)
+{
+	int len = MultiByteToWideChar(CP_UTF8, 0, utf8, -1, NULL, 0);
+	wchar_t* wstr = new wchar_t[len + 1];
+	memset(wstr, 0, len + 1);
+	MultiByteToWideChar(CP_UTF8, 0, utf8, -1, wstr, len);
+	len = WideCharToMultiByte(CP_ACP, 0, wstr, -1, NULL, 0, NULL, NULL);
+	char* str = new char[len + 1];
+	memset(str, 0, len + 1);
+	WideCharToMultiByte(CP_ACP, 0, wstr, -1, str, len, NULL, NULL);
+	if (wstr) delete[] wstr;
+	return str;
+}
+char* localeToUTF8(const char* src) {
+	return localeToUTF8((char*)src);
+}
 char* localeToUTF8(char* src)
 {
 	char* buf = NULL;
@@ -76,6 +106,20 @@ wchar_t* cstringToUnicode(char* aSrc)
 	return unicodestr;
 }
 
+
+// 显示
+
 void sogr(int picNum, SDL_Rect *r1, SDL_Rect *r2) {
+	if (picNum == -1)
+		return;
+	if (r2 == NULL) {
+		SDL_Rect trect = { 0, 0, 1920, 1080 };
+		SDL_RenderCopy(GLBrenderer, GLBpics->getPicText(picNum), r1, RR.rr(&trect));
+		return;
+	}
 	SDL_RenderCopy(GLBrenderer, GLBpics->getPicText(picNum), r1, RR.rr(r2));
+}
+
+void sogr_wnc(int picNum, SDL_Rect* r1, SDL_Rect* r2) {
+	SDL_RenderCopy(GLBrenderer, GLBpics->getPicText(picNum), r1, r2);
 }

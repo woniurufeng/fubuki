@@ -25,6 +25,11 @@ static void load_musData( MUSS *muss ){
 	
 	//muss->playMus(1, 1);
 
+	GLBmuss2->init();
+	GLBmuss2->insertChk("items/sounds/destruction1.mp3", 1);
+	GLBmuss2->insertChk("items/sounds/swing1.mp3", 2);
+	GLBmuss2->insertChk("items/sounds/kick.mp3", 3);
+	
 }
  
 
@@ -39,6 +44,7 @@ static void load_picData(PICS *pics){
 	int tmp_num;
 	while(fin >> tmp_str){
 		fin >> tmp_num;
+		cout << tmp_str << endl;
 		pics->insertPic(tmp_str, tmp_num, blueColorKey);
 	}
 	fin.close();

@@ -7,7 +7,8 @@
 class MONSTER{
 public:
 	int picNum[4];
-	SDL_Rect* vrect[4];
+	SDL_Rect* vrect[4][25], maprect;
+	int realy;
 	int nowx, nowy;
 	int nextx, nexty;
 	int wantx, wanty;
@@ -54,17 +55,26 @@ public:
 class MONSTER_Yagoo : public MONSTER {
 public:
 	int step = 0;
+	SDL_Rect rrect[4][3];
 	MONSTER_Yagoo() : MONSTER() {};
 	MONSTER_Yagoo(int pn[], int nx, int ny, int dt, double hd[], int hp, int atk) : MONSTER(pn, nx, ny, dt, hd, hp, atk) {};
 	MONSTER_Yagoo(int nx, int ny, int dt) : MONSTER(nx, ny, dt) {
 		hp = 100;
 		attack = 1;
-		picNum[0] = 2100;
-		picNum[1] = 2101;
-		picNum[2] = 2102;
-		picNum[3] = 2103;
+		picNum[0] = 2005;
+		picNum[1] = 2005;
+		picNum[2] = 2005;
+		picNum[3] = 2005;
 		harmD[0] = harmD[1] = harmD[2] = 1;
-		vrect[0] = vrect[1] = vrect[2] = vrect[3] = NULL;
+		maprect = { 5, -115, 120, 240 };
+		for (int i = 0; i < 4; i++)
+			for (int j = 0; j < 3; j++)
+				rrect[i][j] = { j * 60,i * 127, 60, 120 };
+		for (int i = 0; i < 4; i++) {
+			vrect[i][0] = &rrect[preXZT[i]][1];
+			for (int j = 1; j <= 20; j++)
+				vrect[i][j] = &rrect[preXZT[i]][preCatMove_cat[20 - j]];
+		}
 	}
 	void tryMove() {
 		moving = 0;

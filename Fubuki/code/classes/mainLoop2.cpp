@@ -2,42 +2,24 @@
 
 
 static void init_BattleField1(battleField* bf) {
-	memset(bf->landMap, 0, sizeof bf->landMap);
-	bf->backGroundPn = -1;
-	//0可通过蓝 1可通过粉色 2墙（灰块）3墙（黑块）
-	bf->landPn[0] = 1000;
-	bf->landPn[1] = 1003;
-	bf->landPn[2] = 1001;
-	bf->landPn[3] = 1002;
-	bf->landType[0] = 0;
-	bf->landType[1] = 0;
-	bf->landType[2] = 1;
-	bf->landType[3] = 1;
-	bf->landVRect[0] = bf->landVRect[1] = bf->landVRect[2] = bf->landVRect[3] = NULL;
-	for (int i = 0; i < 300; i++)
-		for (int j = 0; j < 300; j++) {
-			bf->landMap[i][j] = 2;
-		}
-	for (int i = 150 - 10; i <= 150 + 10; i++)
-		for (int j = 150 - 10; j <= 150 + 10; j++) {
-			bf->landMap[i][j] = (i + j) & 1;
-		}
+	bf->preLoadFile("items/pictures/map001/map001.gdata");
+
 	bf->lstMstNum = bf->mstNum = 4;
 	bf->mstList[0] = new MONSTER();
-	bf->mstList[1] = new MONSTER_Yagoo(150 - 1, 150 - 1, 0);
-	bf->mstList[2] = new MONSTER_Yagoo(150 - 1, 150 + 1, 1);
-	bf->mstList[3] = new MONSTER_Yagoo(150 + 1, 150 - 1, 2);
-	bf->mstList[4] = new MONSTER_Yagoo(150 + 1, 150 + 1, 3);
-	bf->nextx = bf->nexty = bf->nowx = bf->nowy = 150;
+	bf->mstList[1] = new MONSTER_Yagoo(bf->usex + 4, bf->usey + 1, 1);
+	bf->mstList[2] = new MONSTER_Yagoo(bf->usex + 8, bf->usey + 11, 2);
+	bf->mstList[3] = new MONSTER_Yagoo(bf->usex + 11, bf->usey + 7, 2);
+	bf->mstList[4] = new MONSTER_Yagoo(bf->usex + 3, bf->usey + 10, 3);
+	//bf->nextx = bf->nexty = bf->nowx = bf->nowy = 150;
 	bf->direct = 2;
-	bf->mussNum[0] = 301;
-	bf->mussNum[1] = 302;
-	bf->mussNum[2] = 303;
+	bf->mussNum[0] = 501;
+	bf->mussNum[1] = 501;
+	bf->mussNum[2] = 501;
 	bf->atkMus[0] = bf->atkMus[1] = bf->atkMus[2] = 50;
 	bf->wpSize[0].push_back(make_pair(1, 0));
 	bf->hp = 12;
 
-	BPM = 132;
+	BPM = 80;
 	loopLength = 36 * 4;
 }
 void mainLoop2::beforeDelete() {
@@ -52,12 +34,17 @@ void mainLoop2::playSound() {
 
 
 	if (jpNum == 0 && RRtime - lstPzTime > 0 && LRRtime - lstPzTime <= 0) {
+		gameStarting = 1;
+		//cout << RRtime << ' ' << endl;
 		bf->playSound();
 	}
 }
 
 void mainLoop2::beforeLoop(){
 	//sttFrame2 = (Rframe / jpFPS + 2) * jpFPS; 
+	sogr(0000, NULL, NULL);
+	SDL_RenderPresent(GLBrenderer);
+
 	bf = new battleField();
 	init_BattleField1(bf);
 
@@ -65,9 +52,13 @@ void mainLoop2::beforeLoop(){
 	morePress = 0;
 	lstPress = 2;
 
-	fps->start();
-	gsTime = fps->get_ticks() + 200;
-	lstTime = gsTime - 1;
+	//SDL_Delay(1000);
+
+	gameStarting = 0;
+	GLBfps->start();
+	//gsTime = GLBfps->get_ticks() - dtTime;
+	gsTime = GLBfps->get_ticks();
+	lstTime = gsTime - 2;
 }
 
 void mainLoop2::onAfterType() {
@@ -175,23 +166,26 @@ void mainLoop2::drawAll(){
 	bf->draw();
 	
 	//画遮罩
-	//int ddd = zheng(Rframe % 256 - 256 / 2);
-	//GLBpics->changeAlpha(1005, ddd + 127);
-	sogr(1005, NULL, &TMP_rect1);
+	//sogr(1005, NULL, &TMP_rect1);
+	TMP_rect1 = { 0, 111, 1920, 1080 - 222 };
+	sogr(1005, &TMP_rect1, NULL);
 
 	//画黑条
+	/*
+	GLBpics->changeAlpha(1002, 255);
 	TMP_rect1 = { 0, 0, 1920, 111 };
 	sogr(1002, NULL, &TMP_rect1);
 	TMP_rect1 = { 0, 1080 - 111, 1920, 111 };
 	sogr(1002, NULL, &TMP_rect1);
 	TMP_rect1 = { 1920, 0, 1920, 1080 };
 	sogr(1002, NULL, &TMP_rect1);
+	*/
 
 	//画血条
 	drawHp1(bf->hp);
 
 	//画圆圈
-	drawMusCircle1(bf->nowMus, bf->nextMus, bf->musChangingProcess);
+	//drawMusCircle1(bf->nowMus, bf->nextMus, bf->musChangingProcess);
 
 	//画节奏条
 	drawBeat1();

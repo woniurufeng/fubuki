@@ -28,7 +28,7 @@ class talkBox {
 private :
 	PICS* pics;
 	SDL_Renderer* myRenderer;
-	int fontSize;
+	int fontSize, FTSZ;
 	int boxn, bln, bmn, brn;
 	int maxW, maxH, showSpeed;
 	SDL_Rect boxr1, blr1, bmr1, brr1;
@@ -44,6 +44,7 @@ public :
 		myRenderer = NULL;
 		boxn = bln = bmn = brn = 1004;
 		fontSize = RR.ww(20);
+		FTSZ = 20;
 		boxr1 = { 0, 21, 900, 110 - 21 };
 		boxr2 = { 30, 600, 900, 110 - 21 };
 		blr1 = { 0, 0, 11, 21 };
@@ -109,8 +110,8 @@ public :
 		}
 		tmpDraw[ltd] = '\0';
 		//cout << tmpDraw << endl << endl;
-		bmr2.w = fontSize / 2 * rlenthChtName + 2;
-		brr2.x = 30 + 11 + bmr2.w;
+		bmr2.w = FTSZ / 2 * rlenthChtName + 2;
+		brr2.x = 30 + 10 + bmr2.w;
 		sogr(bln, &blr1, &blr2);
 		sogr(bmn, &bmr1, &bmr2);
 		sogr(brn, &brr1, &brr2);
@@ -118,8 +119,8 @@ public :
 
 
 
-		FC_Draw(GLBfont1, myRenderer, RR.ww(bmr2.x+1), RR.hh(bmr2.y+1), "%s\n", chtName);
-		FC_Draw(GLBfont1, myRenderer, RR.ww(sttPos.x), RR.hh(sttPos.y), "%s\n", tmpDraw);
+		FC_Draw(GLBfont1, myRenderer, RR.ww(bmr2.x+1), RR.hh(bmr2.y+1), "%s", chtName);
+		FC_Draw(GLBfont1, myRenderer, RR.ww(sttPos.x), RR.hh(sttPos.y), "%s", tmpDraw);
 	}
 
 private :

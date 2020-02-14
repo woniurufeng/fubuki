@@ -13,8 +13,13 @@
 using namespace std;
 
  void exitGame();
+ void clearEvent();
+ char* U2G(const char* utf8);
  char* localeToUTF8(char* src);
+ char* localeToUTF8(const char* src);
  wchar_t* cstringToUnicode(char* aSrc);
+
+ void sogr_wnc(int picNum, SDL_Rect* r1, SDL_Rect* r2);
  void sogr(int picNum, SDL_Rect* r1, SDL_Rect* r2); //show on GLBrenderer
 
 #endif

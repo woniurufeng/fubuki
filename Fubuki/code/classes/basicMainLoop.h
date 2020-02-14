@@ -8,13 +8,10 @@
 
 class basicMainLoop{
 private:
-	SDL_Renderer *myRenderer;
-	PICS *pics;
-	MUSS *muss;
-	Timer *fps;
 	bool breakSign;
 	basicMainLoop *insideNextLoop;
 	bool noMusic;
+	int gameStarting = 1;
 	
 	SDL_Event event;
 	
@@ -32,25 +29,10 @@ private:
 
 public :
 	basicMainLoop() {
-		myRenderer = NULL;
-		pics = NULL;
-		muss = NULL;
-		fps = NULL;
 		insideNextLoop = NULL;
 		
 		breakSign = 0;
 		//noMusic = 1;
-	};
-	basicMainLoop(SDL_Renderer *myRenderer, PICS *pics, MUSS * muss, Timer *fps){
-		this->myRenderer = myRenderer;
-		this->pics = pics;
-		this->muss = muss;
-		this->fps = fps;
-		insideNextLoop = NULL;
-		
-		breakSign = 0;
-		//noMusic = 1
-		RR.init();
 	};
 	
 	virtual void run();
@@ -82,7 +64,6 @@ private:
 
 public:
 	mainLoop1() : basicMainLoop() {};
-	mainLoop1(SDL_Renderer* myRenderer, PICS* pics, MUSS* muss, Timer* fps) : basicMainLoop(myRenderer, pics, muss, fps) {};
 };
 
 class mainLoop2 : public basicMainLoop {
@@ -103,10 +84,7 @@ private:
 	void pressKey(int key);
 public:
 	battleField *bf;
-	mainLoop2() : basicMainLoop() {
-	};
-	mainLoop2(SDL_Renderer* myRenderer, PICS* pics, MUSS* muss, Timer* fps) : basicMainLoop(myRenderer, pics, muss, fps) {
-	};
+	mainLoop2() : basicMainLoop() {};
 };
 
 class mainLoop_changeDt : public basicMainLoop {
@@ -121,7 +99,6 @@ private:
 
 public:
 	mainLoop_changeDt() : basicMainLoop() {};
-	mainLoop_changeDt(SDL_Renderer* myRenderer, PICS* pics, MUSS* muss, Timer* fps) : basicMainLoop(myRenderer, pics, muss, fps) {};
 };
 
 

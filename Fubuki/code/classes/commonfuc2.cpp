@@ -39,7 +39,7 @@ void drawBeat1() {
 }
 
 void drawMusCircle1(int nowMus, int nextMus, int ds) {
-	double agl = 0;
+	/*double agl = 0;
 	SDL_Rect TMP_rect1 = { 1920 / 2 - 124 / 2, 1080 - 84 - 74 / 2 - 124 / 2, 124, 124 };
 	if (ds != 0 && nowMus != nextMus) {
 		if(nextMus == (nowMus + 1) % 3 )
@@ -51,7 +51,9 @@ void drawMusCircle1(int nowMus, int nextMus, int ds) {
 	else {
 		agl = nowMus * 120;
 		SDL_RenderCopyEx(GLBrenderer, GLBpics->getPicText(3107), NULL, RR.rr(&TMP_rect1), agl, NULL ,SDL_FLIP_NONE);
-	}
+	}*/
+	SDL_Rect TMP_rect1 = { 1920 / 2 - 124 / 2, 1080 - 84 - 74 / 2 - 124 / 2, 124, 124 };
+	sogr(3107, NULL, &TMP_rect1);
 }
 
 

@@ -10,20 +10,22 @@
 #include <fstream>
 #include <unordered_map>
 
+#include "glbvar.h"
+
 //1080 x 1527
 
 		 
 class PICS
 {
 	private :                                 // 材质存储
-    	SDL_Texture *texture[10005];
     	SDL_Texture *loadBMPasTexture( std::string FILE1 );          // 古老而又愚蠢地读取图片，有时间拿这个写低配版本
     	SDL_Texture *loadIMGasTexture( std::string FILE1 );          // 读取图片
     	SDL_Texture *loadIMGasTexture( std::string FILE1, Uint32 colorKey );
     	SDL_Renderer *myRenderer;                                    // 渲染器接口
     public :
         void insertPic( std::string FILE1, int TYPE1, int picNum );
-		void insertPic( std::string FILE1, int picNum );
+		void insertPic(std::string FILE1, int picNum);
+		//void insertPicR(std::string FILE1, int picNum);
 		void insertPic( std::string FILE1, int picNum, Uint32 colorKey );
 		                                                             // 插入一张图片
         SDL_Texture *getPicText( int picNum );                       // 获取图片材质

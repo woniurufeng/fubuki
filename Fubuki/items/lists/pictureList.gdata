@@ -10,12 +10,6 @@ items/pictures/1100.png		1100
 items/pictures/1101.png		1101
 items/pictures/1102.png		1102
 
-items/pictures/2000.png		2000
-items/pictures/2001.png		2001
-items/pictures/2002.png		2002
-items/pictures/2003.png		2003
-items/pictures/2004.png		2004
-
 items/pictures/2100.png		2100
 items/pictures/2101.png		2101
 items/pictures/2102.png		2102
@@ -33,13 +27,27 @@ items/pictures/3012.png		3012
 
 
 items/pictures/3107.png		3107
-items/pictures/3108.png		3108
-items/pictures/3109.png		3109
 
 items/pictures/4001.png		4001
 
 
-items/test/5001.png		5001
-items/test/5002.png		5002
-items/test/5003.png		5003
-items/test/5004.png		5004
+items/test/6001.png		6001
+items/test/6002.png		6002
+items/test/6003.png		6003
+items/test/6004.png		6004
+items/test/6005.png		6005
+
+items/test/7001.png		5001
+items/test/7002.png		5002
+items/test/7003.png		5003
+items/test/7004.png		5004
+
+
+items/pictures/attack/claw/claw1.png 10001
+items/pictures/attack/claw/claw2.png 10002
+items/pictures/attack/claw/claw3.png 10003
+items/pictures/attack/claw/claw4.png 10004
+items/pictures/attack/claw/claw5.png 10005
+
+items/pictures/character/Fubuki01.png 2004
+items/pictures/character/Matsuri02.png 2005

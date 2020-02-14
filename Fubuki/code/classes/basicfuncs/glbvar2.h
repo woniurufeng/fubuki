@@ -2,6 +2,9 @@
 #ifndef GLBVAR_2_H_
 #define GLBVAR_2_H_
 
+//#include <GL/glew.h>
+//#include <GL/glut.h>
+
 #include <cstring>
 #include <algorithm>
 #include <iostream>
@@ -23,6 +26,6 @@ extern MUSS* GLBmuss;
 extern MUSS2* GLBmuss2;
 extern SDL_Renderer* GLBrenderer;
 extern Timer *GLBfps;
-
+extern SDL_Window *GLBwindow;
 
 #endif

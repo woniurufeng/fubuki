@@ -5,18 +5,26 @@ void mainLoop_changeDt::beforeLoop() {
 	//muss->haltAllChk();
 	//muss->playChk(1000);
 	//muss->playChk(201);
-	btp1.set_button(myRenderer, pics, 4001, 0, 20, 20, 60, 60);
-	btd1.set_button(myRenderer, pics, 4001, 0, 100, 20, 60, 60);
-	btg0.set_button(myRenderer, pics, 4001, 0, 180, 20, 60, 60);
-	btBack.set_button(myRenderer, pics, 4001, 0, 300, 20, 60, 60);
+
+	sogr(0000, NULL, NULL);
+	SDL_RenderPresent(GLBrenderer);
+
+	btp1.set_button(4001, 0, 20, 20, 60, 60);
+	btd1.set_button(4001, 0, 100, 20, 60, 60);
+	btg0.set_button(4001, 0, 180, 20, 60, 60);
+	btBack.set_button(4001, 0, 300, 20, 60, 60);
 
 	loopLength = 144;
 	BPM = 132;
 	pressTime = -1000;
 
-	fps->start();
-	gsTime = fps->get_ticks() + 200;
-	lstTime = gsTime - 1;
+	//SDL_Delay(1000);
+
+	gameStarting = 0;
+	GLBfps->start();
+	//gsTime = GLBfps->get_ticks() - dtTime;
+	gsTime = GLBfps->get_ticks();
+	lstTime = gsTime - 2;
 	//gotoGame = 0;
 }
 void mainLoop_changeDt::playSound() {
@@ -25,7 +33,8 @@ void mainLoop_changeDt::playSound() {
 	int lstPzTime = (int)(1.0 * onePz * jpNum);
 
 	if (jpNum % loopLength == 0 && RRtime - lstPzTime > 0 && LRRtime - lstPzTime <= 0) {
-		muss->playChk(301);
+		gameStarting = 1;
+		GLBmuss->playChk(301);
 	}
 }
 
@@ -42,7 +51,8 @@ static void drawDtTime(SDL_Renderer *myRenderer) {
 	for (int i = 0; i < lcdt; i++)
 		tmpDraw[i + 1] = cdt[lcdt - i] + '0';
 	tmpDraw[lcdt + 1] = 'm', tmpDraw[lcdt + 2] = 's', tmpDraw[lcdt + 3] = '\0';
-	FC_Draw(GLBfont1, myRenderer, RR.ww(200), RR.hh(200), "%s\n", tmpDraw);
+
+	FC_Draw(GLBfont1, myRenderer, RR.ww(200), RR.hh(200), "%s", tmpDraw);
 }
 
 void mainLoop_changeDt::drawAll() {
@@ -51,7 +61,7 @@ void mainLoop_changeDt::drawAll() {
 	btg0.show();
 	btBack.show();
 
-	drawDtTime(myRenderer);
+	drawDtTime(GLBrenderer);
 
 	SDL_Rect TMP_rect1;
 	int jpNum = (int)(1.0 * pressTime * BPM / 60000.0);
@@ -70,7 +80,7 @@ void mainLoop_changeDt::drawAll() {
 
 	drawBeat1();
 
-	pics->changeAlpha(3001, min0(255 - (RRtime - pressTime2) / 2));
+	GLBpics->changeAlpha(3001, min0(255 - (RRtime - pressTime2) / 2));
 	TMP_rect1 = { 0, 1080 - 84 - 74, 18, 74 };
 	TMP_rect1.x = 200 + (int)(-200 * (pressTime - lstPzTime) / onePz) + 1920 / 2 - 9;
 	sogr(3001, NULL, &TMP_rect1);
@@ -97,6 +107,7 @@ void mainLoop_changeDt::onType() {
 		breakSign = 1;
 
 	if (event.type == SDL_KEYDOWN) {
+		//GLBmuss2->playChk(3, 3);
 		pressTime = Rtime;
 		pressTime2 = RRtime;
 		double onePz = 60000.0 / BPM;

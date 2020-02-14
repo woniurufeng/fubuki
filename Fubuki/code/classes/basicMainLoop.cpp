@@ -10,7 +10,7 @@ void basicMainLoop::run(){
 	beforeLoop();
 	while( 1 )
     {
-		thisTime = fps->get_ticks();
+		thisTime = GLBfps->get_ticks();
 		/*if (Rtime < 0) {
 			SDL_SetRenderDrawColor(myRenderer, 255, 255, 255, 255);
 			SDL_RenderClear(myRenderer);
@@ -40,24 +40,28 @@ void basicMainLoop::run(){
         
 		
 		//更新画面
-		if (!cap) {
-			//清空重绘 
-			SDL_SetRenderDrawColor(myRenderer, 255, 255, 255, 255);
-			SDL_RenderClear(myRenderer);
-			drawAll();
-			SDL_RenderPresent(myRenderer);
-			cout << "FPS = " << 1000.0 / (thisTime - lstRefreshTime) << endl;
-			lstRefreshTime = thisTime;
+		if (gameStarting) {
+			if (!cap) {
+				//清空重绘 
+				SDL_SetRenderDrawColor(GLBrenderer, 255, 255, 255, 255);
+				SDL_RenderClear(GLBrenderer);
+				drawAll();
+				SDL_RenderPresent(GLBrenderer);
+				if (1000.0 / (thisTime - lstRefreshTime) < 100)
+					cout << "FPS = " << 1000.0 / (thisTime - lstRefreshTime) << endl;
+				lstRefreshTime = thisTime;
+			}
+			else if (LRframe != Rframe) {
+				//清空重绘 
+				SDL_SetRenderDrawColor(GLBrenderer, 255, 255, 255, 255);
+				SDL_RenderClear(GLBrenderer);
+				drawAll();
+				SDL_RenderPresent(GLBrenderer);
+				//cout << "FPS = " << 1000.0 / (thisTime - lstRefreshTime) << endl;
+				lstRefreshTime = thisTime;
+			}
 		}
-		else if (LRframe != Rframe) {
-			//清空重绘 
-			SDL_SetRenderDrawColor(myRenderer, 255, 255, 255, 255);
-			SDL_RenderClear(myRenderer);
-			drawAll();
-			SDL_RenderPresent(myRenderer);
-			//cout << "FPS = " << 1000.0 / (thisTime - lstRefreshTime) << endl;
-			lstRefreshTime = thisTime;
-		}
+		
 		// 播放声音 
 		//if(LRframe != Rframe)
     	playSound();

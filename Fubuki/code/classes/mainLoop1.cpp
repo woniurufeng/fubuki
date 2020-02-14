@@ -3,17 +3,17 @@
 
 
 void mainLoop1::beforeLoop() {
-	muss->haltAllChk();
-	muss->playChk(1000);
-	muss->playChk(201);
-	bt1.set_button(myRenderer, pics, 4001, 0, 20, 20, 60, 60);
-	bt2.set_button(myRenderer, pics, 4001, 0, 100, 20, 60, 60);
-	bt3.set_button(myRenderer, pics, 4001, 0, 180, 20, 60, 60);
-	bt4.set_button(myRenderer, pics, 4001, 0, 260, 20, 60, 60);
-	btEnd.set_button(myRenderer, pics, 4001, 0, 20, 100, 60, 60);
+	GLBmuss->haltAllChk();
+	GLBmuss->playChk(1000);
+	GLBmuss->playChk(201);
+	bt1.set_button(4001, 0, 20, 20, 60, 60);
+	bt2.set_button(4001, 0, 100, 20, 60, 60);
+	bt3.set_button(4001, 0, 180, 20, 60, 60);
+	bt4.set_button(4001, 0, 260, 20, 60, 60);
+	btEnd.set_button(4001, 0, 20, 100, 60, 60);
 	gotoGame = 0;
 	tb1 = new talkBox();
-	tb1->init(myRenderer, pics, "items/test/test1.txt");
+	tb1->init(GLBrenderer, GLBpics, "items/test/test1.txt");
 
 }
 
@@ -21,6 +21,21 @@ static string xxx;
 static char xx[100][500], text[1000];
 static int len[100], zlen[100], llen, lxxn;
 void mainLoop1::drawAll() {
+	SDL_Rect trect1 = { 0, 0, 816, 624 };
+	sogr(6001, NULL, &trect1);
+	sogr(6004, NULL, &trect1);
+
+	SDL_SetTextureBlendMode(GLBpics->getPicText(6005), SDL_BlendMode_Sub);
+	sogr(6005, NULL, &trect1);
+	SDL_SetTextureBlendMode(GLBpics->getPicText(6002), SDL_BLENDMODE_ADD);
+	sogr(6002, NULL, &trect1);
+	sogr(6005, NULL, &trect1);
+	
+	SDL_SetTextureBlendMode(GLBpics->getPicText(6003), SDL_BLENDMODE_ADD);
+	sogr(6003, NULL, &trect1);
+
+
+
 	bt1.show();
 	bt2.show();
 	//bt3.show();
@@ -53,10 +68,10 @@ void mainLoop1::init(int type) {
 	//breakSign = 1;
 
 	for (int i = 0; i < 3000; i++)
-		muss->haltAllChk(i);
+		GLBmuss->haltAllChk(i);
 
-	fps->start();
-	gsTime = fps->get_ticks() + dtTime;
+	GLBfps->start();
+	gsTime = GLBfps->get_ticks() + dtTime;
 }
 
 void mainLoop1::onAfterPframe() {
@@ -64,26 +79,30 @@ void mainLoop1::onAfterPframe() {
 
 	if (gotoGame == 1) {
 		init(0);
-		insideNextLoop = new mainLoop2(myRenderer, pics, muss, fps);
+		//clearEvent();
+		insideNextLoop = new mainLoop2();
 		insideNextLoop->run();
 		delete insideNextLoop;
+		//clearEvent();
 		insideNextLoop = NULL;
 		gotoGame = 0;
 
-		muss->haltAllChk();
-		muss->playChk(201);
+		GLBmuss->haltAllChk();
+		GLBmuss->playChk(201);
 	}
 	if (gotoGame == 2) {
 		init(0);
-		insideNextLoop = new mainLoop_changeDt(myRenderer, pics, muss, fps);
+		//clearEvent();
+		insideNextLoop = new mainLoop_changeDt();
 		insideNextLoop->run();
 		delete insideNextLoop;
+		//clearEvent();
 		saveDtTime();
 		insideNextLoop = NULL;
 		gotoGame = 0;
 
-		muss->haltAllChk();
-		muss->playChk(201);
+		GLBmuss->haltAllChk();
+		GLBmuss->playChk(201);
 	}
 	if (gotoGame == -1) {
 		exitGame();

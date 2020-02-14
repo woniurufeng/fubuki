@@ -24,15 +24,13 @@ class Button
     public:
     //Initialize the variables
     int picnum;
-    SDL_Renderer *myRenderer;
-    PICS *hello;
     Button(){
     	CLIP_MOUSEOVER = 0;
 		CLIP_MOUSEOUT = 1;
 		CLIP_MOUSEDOWN = 2;
 		CLIP_MOUSEUP = 3;
 	}
-    Button(SDL_Renderer *mR, PICS *pic, int pn, int type, int x, int y, int w, int h){
+    Button(int pn, int type, int x, int y, int w, int h){
 	    //Set the button's attributes
     	CLIP_MOUSEOVER = 0;
 		CLIP_MOUSEOUT = 1;
@@ -43,33 +41,29 @@ class Button
 	    box.w = w;
 	    box.h = h;
 	    picnum = pn;
-	    hello = pic;
-	    myRenderer = mR;
 	    set_clips(type);
 	
 	    //Set the default sprite
 	    clip = &clips[ CLIP_MOUSEOUT ];
 	}
-	void set_button(SDL_Renderer *mR, PICS *pic, int pn, int type, int x, int y, int w, int h)
+	void set_button(int pn, int type, int x, int y, int w, int h)
 	{
 	    //Set the button's attributes
-	    box.x = RR.ww(x);
-	    box.y = RR.hh(y);
-	    box.w = RR.ww(w);
-	    box.h = RR.hh(h);
+		box.x = x;
+		box.y = y;
+		box.w = w;
+		box.h = h;
 	    picnum = pn;
-	    hello = pic;
-	    myRenderer = mR;
 	    set_clips(type);
 	
 	    //Set the default sprite
 	    clip = &clips[ CLIP_MOUSEOUT ];
 	}
 	void set_box(int x, int y, int w, int h) {
-		box.x = RR.ww(x);
-		box.y = RR.hh(y);
-		box.w = RR.ww(w);
-		box.h = RR.hh(h);
+		box.x = x;
+		box.y = y;
+		box.w = w;
+		box.h = h;
 	}
 
     //Handles events and set the button's sprite region
@@ -87,7 +81,7 @@ class Button
 	        y = event.motion.y;
 	
 	        //If the mouse is over the button
-	        if( ( x > box.x ) && ( x < box.x + box.w ) && ( y > box.y ) && ( y < box.y + box.h ) )
+			if ((x > RR.ww(box.x)) && (x < RR.ww(box.x + box.w)) && (y > RR.hh(box.y)) && (y < RR.hh(box.y + box.h)))
 	        {
 	            //Set the button sprite
 	            clip = &clips[ CLIP_MOUSEOVER ];
@@ -111,7 +105,7 @@ class Button
 	            y = event.button.y;
 	
 	            //If the mouse is over the button
-	            if( ( x > box.x ) && ( x < box.x + box.w ) && ( y > box.y ) && ( y < box.y + box.h ) )
+				if ((x > RR.ww(box.x)) && (x < RR.ww(box.x + box.w)) && (y > RR.hh(box.y)) && (y < RR.hh(box.y + box.h)))
 	            {
 	                //Set the button sprite
 	                clip = &clips[ CLIP_MOUSEDOWN ];
@@ -130,7 +124,7 @@ class Button
 	            y = event.button.y;
 	
 	            //If the mouse is over the button
-	            if( ( x > box.x ) && ( x < box.x + box.w ) && ( y > box.y ) && ( y < box.y + box.h ) )
+				if ((x > RR.ww(box.x)) && (x < RR.ww(box.x + box.w)) && (y > RR.hh(box.y)) && (y < RR.hh(box.y + box.h)))
 	            {
 	                //Set the button sprite
 	                clip = &clips[ CLIP_MOUSEUP ];
@@ -149,7 +143,8 @@ class Button
 	    //Show the button
 	    //apply_surface( box.x, box.y, buttonSheet, screen, clip );
 	    //SDL_RenderCopy ( myRenderer, hello->getPicText(picnum), clip, &box);
-		SDL_RenderCopy(myRenderer, hello->getPicText(picnum), clip, &box);
+		//SDL_RenderCopy(myRenderer, hello->getPicText(picnum), clip, &box);
+		sogr(picnum, clip, &box);
 	}
 	
 	void set_clips(int type)

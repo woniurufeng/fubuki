@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <iostream>
 #include <fstream>
+#include <Windows.h>
 
 #include "SDL_FontCache.h"
 
@@ -47,10 +48,21 @@ extern int thisTime; //这次进入循环时间
 extern int loopLength;
 
 extern int PRE_DXY[4][2];
+extern int preCatMove_jmp[20];
+extern int preXZT[4];
+extern int preCatMove_cat[20];
 
 extern FC_Font* GLBfont1;
+extern SDL_Color GLBttfColor;
 
 extern ofstream fout1;
+
+extern SDL_BlendMode GLBblendmode01;
+extern SDL_BlendMode GLBblendmode02;
+extern SDL_BlendMode GLBblendmode03;
+#define SDL_BlendMode_Sub GLBblendmode01
+#define SDL_BlendMode_Max GLBblendmode02
+#define SDL_BlendMode_Add GLBblendmode03
 
 // 真实帧数计算
 #define Rtime (thisTime - gsTime - dtTime)
@@ -62,8 +74,9 @@ extern ofstream fout1;
 #define Rframe (Rtime * FRAMES_PER_SECOND / 1000)
 #define LRframe (LRtime * FRAMES_PER_SECOND / 1000)
 
-#define Rmovingframe (Rtime / ((int)((60000.0/BPM-2.0*reTime)/20.0)-1) )
-#define LRmovingframe (LRtime / ((int)((60000.0/BPM-2.0*reTime)/20.0)-1) )
+#define Rmovingtime (min(((int)((60000.0/BPM-2.0*reTime)/20.0)-1), 20))
+#define Rmovingframe (Rtime / Rmovingtime )
+#define LRmovingframe (LRtime / Rmovingtime )
 
 static SDL_Rect rect, rect1;
 class realRect {
@@ -122,6 +135,10 @@ struct RGBA {
 		g = (color & 0xff00) >> 8;
 		b = color & 0xff;
 		a = color >> 24;
+	}
+	void change1() {
+		swap(r, a);
+		swap(g, b);
 	}
 };
 extern realRect RR;
