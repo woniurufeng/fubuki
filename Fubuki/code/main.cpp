@@ -66,10 +66,10 @@ int main(int argc, char * argv[])
 	load_picData(pics);
 
 	//载入BGM
-	MUSS *muss = new MUSS();
+	//MUSS *muss = new MUSS();
 	MUSS2* muss2 = new MUSS2();
 	GLBmuss2 = muss2;
-	load_musData(muss);
+	load_musData();
 
 	//SDL_Event event;
 
@@ -83,12 +83,12 @@ int main(int argc, char * argv[])
 
 	//初始化
 	GLBpics = pics;
-	GLBmuss = muss;
+	//GLBmuss = muss;
 	GLBrenderer = myRenderer;
 	fps.start();
 	init_all(&fps);
 
-	muss->playChk(1000);
+	muss2->playChk(1000);
 
 	//进入游戏
 

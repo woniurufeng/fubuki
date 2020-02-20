@@ -3,9 +3,10 @@
 
 
 void mainLoop1::beforeLoop() {
-	GLBmuss->haltAllChk();
-	GLBmuss->playChk(1000);
-	GLBmuss->playChk(201);
+	GLBmuss2->haltChk();
+	GLBmuss2->playChk(1000, 1);
+	printf("SDL_Init failed: %s\n", SDL_GetError());
+	GLBmuss2->playChk(201, 1);
 	bt1.set_button(4001, 0, 20, 20, 60, 60);
 	bt2.set_button(4001, 0, 100, 20, 60, 60);
 	bt3.set_button(4001, 0, 180, 20, 60, 60);
@@ -68,7 +69,7 @@ void mainLoop1::init(int type) {
 	//breakSign = 1;
 
 	for (int i = 0; i < 3000; i++)
-		GLBmuss->haltAllChk(i);
+		GLBmuss2->haltChk(i);
 
 	GLBfps->start();
 	gsTime = GLBfps->get_ticks() + dtTime;
@@ -87,8 +88,8 @@ void mainLoop1::onAfterPframe() {
 		insideNextLoop = NULL;
 		gotoGame = 0;
 
-		GLBmuss->haltAllChk();
-		GLBmuss->playChk(201);
+		GLBmuss2->haltChk();
+		GLBmuss2->playChk(201);
 	}
 	if (gotoGame == 2) {
 		init(0);
@@ -101,8 +102,8 @@ void mainLoop1::onAfterPframe() {
 		insideNextLoop = NULL;
 		gotoGame = 0;
 
-		GLBmuss->haltAllChk();
-		GLBmuss->playChk(201);
+		GLBmuss2->haltChk();
+		GLBmuss2->playChk(201);
 	}
 	if (gotoGame == -1) {
 		exitGame();

@@ -17,12 +17,12 @@
 #include "glbvar.h"
 
 #include "pics.h"
-#include "muss.h"
+//#include "muss.h"
 #include "muss_old.h"
 #include "timer.h"
 
 extern PICS* GLBpics;
-extern MUSS* GLBmuss;
+//extern MUSS* GLBmuss;
 extern MUSS2* GLBmuss2;
 extern SDL_Renderer* GLBrenderer;
 extern Timer *GLBfps;

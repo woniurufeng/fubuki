@@ -19,10 +19,17 @@ int MUSS2::init(){
 
 void MUSS2::playChk( int chkNum ){
 	int channel = Mix_PlayChannel( -1, chk[chkNum], 0 );
+	Mix_Volume(channel, 128);
 	channelHash[channel] = chkNum;
 }
-void MUSS2::playChk( int chkNum, int channel ){
-	int channell = Mix_PlayChannel( channel, chk[chkNum], 0 );
+void MUSS2::playChk(int chkNum, int channel) {
+	int channell = Mix_PlayChannel(channel, chk[chkNum], 0);
+	Mix_Volume(channel, 128);
+	channelHash[channell] = chkNum;
+}
+void MUSS2::playChk(int chkNum, int channel, int loud) {
+	int channell = Mix_PlayChannel(channel, chk[chkNum], 0);
+	Mix_Volume(channel, loud);
 	channelHash[channell] = chkNum;
 }
 void MUSS2::pauseChk( int channel ){

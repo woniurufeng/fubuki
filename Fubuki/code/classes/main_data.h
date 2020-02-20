@@ -10,8 +10,9 @@
 #include "commonfuc2.h"
 
 //extern void load_musData(Muss *muss);
-static void load_musData( MUSS *muss ){
-	muss->init();
+static void load_musData(){
+	//muss->init();
+	GLBmuss2->init();
 
 	ifstream fin("items/lists/musicList.gdata");
 
@@ -19,13 +20,13 @@ static void load_musData( MUSS *muss ){
 	int tmp_num;
 	while (fin >> tmp_str) {
 		fin >> tmp_num;
-		muss->insertChk(tmp_str, tmp_num);
+		GLBmuss2->insertChk(tmp_str, tmp_num);
+		printf("SDL_Init failed: %s\n", SDL_GetError());
 	}
 	fin.close();
 	
 	//muss->playMus(1, 1);
 
-	GLBmuss2->init();
 	GLBmuss2->insertChk("items/sounds/destruction1.mp3", 1);
 	GLBmuss2->insertChk("items/sounds/swing1.mp3", 2);
 	GLBmuss2->insertChk("items/sounds/kick.mp3", 3);

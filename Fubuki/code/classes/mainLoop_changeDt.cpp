@@ -34,7 +34,7 @@ void mainLoop_changeDt::playSound() {
 
 	if (jpNum % loopLength == 0 && RRtime - lstPzTime > 0 && LRRtime - lstPzTime <= 0) {
 		gameStarting = 1;
-		GLBmuss->playChk(301);
+		GLBmuss2->playChk(301);
 	}
 }
 

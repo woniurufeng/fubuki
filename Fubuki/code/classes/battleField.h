@@ -63,14 +63,18 @@ public:
 				delete mstList[i];
 	}
 	void playSound() {
-		int tt1 = GLBfps->get_ticks();
+		/*int tt1 = GLBfps->get_ticks();
 		GLBmuss->playChk(mussNum[0], -1, 0, 0);
 		int tt2 = GLBfps->get_ticks();
 		GLBmuss->playChk(mussNum[1], -1, tt2 - tt1 + 1, 0);
 		GLBfps->get_ticks();
 		GLBmuss->playChk(mussNum[2], -1, tt2 - tt1 + 1, 0);
 		GLBmuss->changeLoud(mussNum[0], 200);
-		fout1<< tt1 << ' ' << tt2 << endl;
+		fout1<< tt1 << ' ' << tt2 << endl;*/
+		GLBmuss2->playChk(mussNum[0], 5, 0);
+		GLBmuss2->playChk(mussNum[1], 6, 0);
+		GLBmuss2->playChk(mussNum[2], 7, 0);
+		GLBmuss2->changeLoud(5, 100);
 	}
 
 	void insertNeedDraw(int picNum, int alp, SDL_Rect* r1, SDL_Rect* r2) {
@@ -277,16 +281,16 @@ public:
 			if (musChangingProcess <= 0) {
 				musChangingProcess = 0;
 				nowMus = nextMus;
-				GLBmuss->changeLoud(mussNum[nowMus], 200);
+				GLBmuss2->changeLoud(5 + nowMus, 200);
 				for (int i = 0; i < 3; i++)
 					if (i != nowMus)
-						GLBmuss->changeLoud(mussNum[i], 0);
+						GLBmuss2->changeLoud(5 + i, 0);
 			}
 			else {
 				int oth = 3 - nowMus - nextMus;
-				GLBmuss->changeLoud(mussNum[oth], 0);
-				GLBmuss->changeLoud(mussNum[nextMus], 200 - musChangingProcess);
-				GLBmuss->changeLoud(mussNum[nowMus], musChangingProcess);
+				GLBmuss2->changeLoud(5 + oth, 0);
+				GLBmuss2->changeLoud(5 + nextMus, 100 - musChangingProcess / 2);
+				GLBmuss2->changeLoud(5 + nowMus, musChangingProcess / 2);
 			}
 		}
 	}
@@ -322,6 +326,11 @@ public:
 			;
 	}
 	void tryMove() {
+		nextx = nowx;
+		nexty = nowy;
+		TtryMove();
+	}
+	void TtryMove() {
 		if (movingProcess != 0) {
 			movingProcess = 0;
 			trueMove();
@@ -510,7 +519,7 @@ public:
 			nexty = nowy + PRE_DXY[tapped][1];
 			ifAttack = 1;
 			direct = tapped;
-			tryMove();
+			TtryMove();
 			fout1 << nextx << ' ' << nexty << endl;
 			return;
 		}

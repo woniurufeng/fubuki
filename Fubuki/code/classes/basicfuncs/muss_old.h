@@ -26,10 +26,14 @@ public:
 	
 	void playChk( int chkNum );
 	void playChk( int chkNum, int channel );
+	void playChk(int chkNum, int channel, int loud);
 	void pauseChk( int channel );
 	void resumeChk( int channel );
 	void haltChk( int channel );
 	void haltChk();
+	void changeLoud(int channel, int loud) {
+		Mix_Volume(channel, loud);
+	}
 	
 	int init();
 	MUSS2();
