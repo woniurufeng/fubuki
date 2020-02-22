@@ -56,12 +56,15 @@ public:
 
 	int hp;
 
-	battleField() {}
+	battleField() {
+		for(int i = 0; i < 100; i++)
+			mstList[i] = NULL;
+	}
 	void DbattleField() {
 		aftLoadFile();
 		for (int i = 0; i < 100; i++)
 			if (mstList[i] != NULL)
-				delete mstList[i];
+				delete (mstList[i]);
 	}
 	void playSound() {
 		/*int tt1 = GLBfps->get_ticks();

@@ -106,6 +106,7 @@ void mainLoop1::onAfterPframe() {
 		insideNextLoop = new mainLoop_battle1();
 		insideNextLoop->set_initBF(init_BattleField1);
 		insideNextLoop->run();
+		insideNextLoop->beforeDelete();
 		delete insideNextLoop;
 		//clearEvent();
 		insideNextLoop = NULL;

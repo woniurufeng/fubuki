@@ -25,9 +25,9 @@ private:
 	virtual void onAfterDraw() {};
 	virtual void onAfterPframe() {};
 	virtual void onAfterLoop() {};
-	virtual void beforeDelete() {};
 
 public :
+	battleField* bf;
 	basicMainLoop() {
 		insideNextLoop = NULL;
 		
@@ -38,6 +38,7 @@ public :
 	virtual void run();
 
 	virtual void set_initBF(void (*init)(battleField*)) {};
+	virtual void beforeDelete() {};
 	
 	friend class mainLoop1;
 	friend class mainLoop_battle1;
@@ -72,7 +73,7 @@ class mainLoop_battle1 : public basicMainLoop {
 private:
 	int siShift = -1, ggSign = 0;
 	int pressTime = 0, morePress, nowPress, lstPress;
-	void (*init_BattleField)(battleField*);
+	void (*init_BattleField)(battleField*) = NULL;
 
 	void beforeLoop();
 	void onBegin();
@@ -81,13 +82,12 @@ private:
 	void drawAll();
 	void onAfterPframe();
 	void playSound();  
-	void beforeDelete();
 
 	void pressKey(int key);
 public:
-	battleField *bf;
 	mainLoop_battle1() : basicMainLoop() {};
 	void set_initBF(void (*init)(battleField*)) { init_BattleField = init; }
+	void beforeDelete();
 };
 
 class mainLoop_changeDt : public basicMainLoop {

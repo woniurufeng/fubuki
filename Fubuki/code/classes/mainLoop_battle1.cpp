@@ -3,8 +3,8 @@
 
 
 void mainLoop_battle1::beforeDelete() {
-	//bf->DbattleField();
-	//delete bf;
+	bf->DbattleField();
+	delete bf;
 }
 
 void mainLoop_battle1::playSound() {
@@ -25,6 +25,8 @@ void mainLoop_battle1::beforeLoop(){
 	sogr(0000, NULL, NULL);
 	SDL_RenderPresent(GLBrenderer);
 
+	if (init_BattleField == NULL)
+		cout << "fuck " << endl;
 	bf = new battleField();
 	init_BattleField(bf);
 
