@@ -36,9 +36,11 @@ public :
 	};
 	
 	virtual void run();
+
+	virtual void set_initBF(void (*init)(battleField*)) {};
 	
 	friend class mainLoop1;
-	friend class mainLoop2;
+	friend class mainLoop_battle1;
 	friend class mainLoop_changeDt;
 	//friend class mainLoop3;
 	//friend class mainLoop4;
@@ -66,11 +68,11 @@ public:
 	mainLoop1() : basicMainLoop() {};
 };
 
-class mainLoop2 : public basicMainLoop {
+class mainLoop_battle1 : public basicMainLoop {
 private:
 	int siShift = -1, ggSign = 0;
 	int pressTime = 0, morePress, nowPress, lstPress;
-
+	void (*init_BattleField)(battleField*);
 
 	void beforeLoop();
 	void onBegin();
@@ -84,7 +86,8 @@ private:
 	void pressKey(int key);
 public:
 	battleField *bf;
-	mainLoop2() : basicMainLoop() {};
+	mainLoop_battle1() : basicMainLoop() {};
+	void set_initBF(void (*init)(battleField*)) { init_BattleField = init; }
 };
 
 class mainLoop_changeDt : public basicMainLoop {

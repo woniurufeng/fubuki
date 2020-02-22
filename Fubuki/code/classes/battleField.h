@@ -44,6 +44,7 @@ public:
 	int weapeonPic[10] = { 10001,10002,10003,10004,10005 };
 	
 	int startmovingtime = 0;
+	int startchangingmustime = 0;
 	int ifTrymove = 0;
 	int ifAttacked = 0, ifAttack = 0, movingProcess = 0, ifKill = 0, ifRealAttack = 0;
 	int nowMus = 0, nextMus = 0, musChangingProcess = 0;
@@ -277,7 +278,7 @@ public:
 			}
 		}
 		if (musChangingProcess != 0 && nowMus != nextMus) {
-			musChangingProcess = 200 - (Rtime - startmovingtime) / Rmovingtime;
+			musChangingProcess = 200 - (Rtime - startchangingmustime) / Rmovingtime;
 			if (musChangingProcess <= 0) {
 				musChangingProcess = 0;
 				nowMus = nextMus;
@@ -285,12 +286,14 @@ public:
 				for (int i = 0; i < 3; i++)
 					if (i != nowMus)
 						GLBmuss2->changeLoud(5 + i, 0);
+				cout << "end" << endl;
 			}
 			else {
 				int oth = 3 - nowMus - nextMus;
 				GLBmuss2->changeLoud(5 + oth, 0);
 				GLBmuss2->changeLoud(5 + nextMus, 100 - musChangingProcess / 2);
 				GLBmuss2->changeLoud(5 + nowMus, musChangingProcess / 2);
+				//cout << oth << " 0, " << nextMus << " " << 100 - musChangingProcess / 2 << ", " << nowMus << " " << musChangingProcess / 2 << endl;
 			}
 		}
 	}
@@ -526,6 +529,7 @@ public:
 		if (tapped == 4 || tapped == 5) {
 			if (musChangingProcess == 0) {
 				musChangingProcess = 200;
+				startchangingmustime = Rtime;
 				nextMus = (nowMus + 6 - tapped) % 3;
 			}
 			tryMove();

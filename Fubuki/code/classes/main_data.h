@@ -21,7 +21,6 @@ static void load_musData(){
 	while (fin >> tmp_str) {
 		fin >> tmp_num;
 		GLBmuss2->insertChk(tmp_str, tmp_num);
-		printf("SDL_Init failed: %s\n", SDL_GetError());
 	}
 	fin.close();
 	

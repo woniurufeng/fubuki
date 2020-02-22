@@ -125,13 +125,13 @@
     <ClCompile Include="code\classes\basicfuncs\glbvar2.cpp">
       <Filter>源文件\basicfuncs</Filter>
     </ClCompile>
-    <ClCompile Include="code\classes\mainLoop2.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="code\classes\commonfuc2.cpp">
       <Filter>源文件\basicfuncs</Filter>
     </ClCompile>
     <ClCompile Include="code\classes\mainLoop_changeDt.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="code\classes\mainLoop_battle1.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

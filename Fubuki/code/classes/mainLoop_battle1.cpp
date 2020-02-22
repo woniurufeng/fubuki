@@ -1,33 +1,13 @@
 #include "basicMainLoop.h"
 
 
-static void init_BattleField1(battleField* bf) {
-	bf->preLoadFile("items/pictures/map001/map001.gdata");
 
-	bf->lstMstNum = bf->mstNum = 4;
-	bf->mstList[0] = new MONSTER();
-	bf->mstList[1] = new MONSTER_Yagoo(bf->usex + 4, bf->usey + 1, 1);
-	bf->mstList[2] = new MONSTER_Yagoo(bf->usex + 8, bf->usey + 11, 2);
-	bf->mstList[3] = new MONSTER_Yagoo(bf->usex + 11, bf->usey + 7, 2);
-	bf->mstList[4] = new MONSTER_Yagoo(bf->usex + 3, bf->usey + 10, 3);
-	//bf->nextx = bf->nexty = bf->nowx = bf->nowy = 150;
-	bf->direct = 2;
-	bf->mussNum[0] = 501;
-	bf->mussNum[1] = 501;
-	bf->mussNum[2] = 501;
-	bf->atkMus[0] = bf->atkMus[1] = bf->atkMus[2] = 50;
-	bf->wpSize[0].push_back(make_pair(1, 0));
-	bf->hp = 12;
-
-	BPM = 80;
-	loopLength = 36 * 4;
-}
-void mainLoop2::beforeDelete() {
-	bf->DbattleField();
-	delete bf;
+void mainLoop_battle1::beforeDelete() {
+	//bf->DbattleField();
+	//delete bf;
 }
 
-void mainLoop2::playSound() {
+void mainLoop_battle1::playSound() {
 	int jpNum = (int)(1.0 * RRtime * BPM / 60000.0);
 	double onePz = 60000.0 / BPM;
 	int lstPzTime = (int)(1.0 * onePz * jpNum);
@@ -40,13 +20,13 @@ void mainLoop2::playSound() {
 	}
 }
 
-void mainLoop2::beforeLoop(){
+void mainLoop_battle1::beforeLoop(){
 	//sttFrame2 = (Rframe / jpFPS + 2) * jpFPS; 
 	sogr(0000, NULL, NULL);
 	SDL_RenderPresent(GLBrenderer);
 
 	bf = new battleField();
-	init_BattleField1(bf);
+	init_BattleField(bf);
 
 	nowPress = -1;
 	morePress = 0;
@@ -61,11 +41,11 @@ void mainLoop2::beforeLoop(){
 	lstTime = gsTime - 2;
 }
 
-void mainLoop2::onAfterType() {
+void mainLoop_battle1::onAfterType() {
 	bf->onAfterType();
 }
 
-void mainLoop2::onBegin() {
+void mainLoop_battle1::onBegin() {
 	int jpNum = (int)(1.0 * Rtime * BPM / 60000.0);
 	double onePz = 60000.0 / BPM;
 	int lstPzTime = (int)(1.0 * onePz * jpNum);
@@ -83,7 +63,7 @@ void mainLoop2::onBegin() {
 }
 
 
-void mainLoop2::pressKey(int key) {
+void mainLoop_battle1::pressKey(int key) {
 	// 记录按键时间 
 	//pressFrame = Rframe;
 	pressTime = Rtime;
@@ -110,7 +90,7 @@ void mainLoop2::pressKey(int key) {
 	return;
 }
 
-void mainLoop2::onAfterPframe(){
+void mainLoop_battle1::onAfterPframe(){
 	int jpNum = (int)(1.0 * Rtime * BPM / 60000.0);
 	double onePz = 60000.0 / BPM;
 	int lstPzTime = (int)(1.0 * onePz * jpNum);
@@ -121,7 +101,7 @@ void mainLoop2::onAfterPframe(){
 
 
 
-void mainLoop2::onType(){
+void mainLoop_battle1::onType(){
 	if( event.type == SDL_KEYUP )
     	if(event.key.keysym.sym == SDLK_LSHIFT || event.key.keysym.sym == SDLK_RSHIFT)
     		siShift = -1;
@@ -150,7 +130,7 @@ void mainLoop2::onType(){
 	}
 }
 
-void mainLoop2::drawAll(){
+void mainLoop_battle1::drawAll(){
 	SDL_Rect TMP_rect1 = { 0, 0, 1920, 1080 };
 	if (ggSign) {
 		if (bf->gameType == -1)

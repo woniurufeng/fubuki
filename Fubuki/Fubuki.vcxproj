@@ -54,7 +54,7 @@
     <ClCompile Include="code\classes\basicMainLoop.cpp" />
     <ClCompile Include="code\classes\commonfuc2.cpp" />
     <ClCompile Include="code\classes\mainLoop1.cpp" />
-    <ClCompile Include="code\classes\mainLoop2.cpp" />
+    <ClCompile Include="code\classes\mainLoop_battle1.cpp" />
     <ClCompile Include="code\classes\mainLoop_changeDt.cpp" />
     <ClCompile Include="code\main.cpp" />
   </ItemGroup>
